@@ -1,17 +1,31 @@
-function countPrimes(n) {
-  const isPrime = new Array(n).fill(true);
-  isPrime[0] = false;
-  isPrime[1] = false;
-  for (let i = 2; i * i < n; i++) {
-    if (isPrime[i]) {
-      for (let j = i * i; j < n; j += i) {
-        isPrime[j] = false;
+function spiralOrder(matrix) {
+  if (matrix.length === 0) return [];
+  const result = [];
+  let top = 0;
+  let bottom = matrix.length - 1;
+  let left = 0;
+  let right = matrix[0].length - 1;
+  while (top <= bottom && left <= right) {
+    for (let i = left; i <= right; i++) {
+      result.push(matrix[top][i]);
+    }
+    top++;
+    for (let i = top; i <= bottom; i++) {
+      result.push(matrix[i][right]);
+    }
+    right--;
+    if (top <= bottom) {
+      for (let i = right; i >= left; i--) {
+        result.push(matrix[bottom][i]);
       }
+      bottom--;
+    }
+    if (left <= right) {
+      for (let i = bottom; i >= top; i--) {
+        result.push(matrix[i][left]);
+      }
+      left++;
     }
   }
-  let count = 0;
-  for (let i = 2; i < n; i++) {
-    if (isPrime[i]) count++;
-  }
-  return count;
+  return result;
 }
