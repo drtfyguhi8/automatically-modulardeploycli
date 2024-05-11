@@ -1,1 +1,3 @@
-const randomNumber = Math.floor(Math.random() * 10) + 1;
+function countWords(str) {
+  return str.split(" ").filter((word) => word !== "").length;
+}
